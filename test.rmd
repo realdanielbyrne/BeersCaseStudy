@@ -1,0 +1,29 @@
+---
+title: "test"
+author: "Daniel Byrne"
+date: "October 9, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` { r}
+```{r echo=TRUE}
+setwd(".")
+#PassengerId	Survived	Pclass	Name	Sex	Age	SibSp	Parch	Ticket	Fare	Cabin	Embarked
+
+data <- read.csv2("titanic.csv", header = TRUE, sep=",", dec=".")
+```
+### b.
+Output the respective count of females and males aboard the Titanic. Plot the frequency of females and males.  Be sure to give an accurate title and label the axes.
+
+```{r echo=TRUE}
+numMales <- length(which(data$Sex == "male"))
+numFemales <- length(which(data$Sex == "female"))
+
+sprintf("The number of males are %i",numMales)
+sprintf("The number of females are %i",numFemales)
+```
+```
