@@ -16,6 +16,8 @@ A brief introduction to the code modules used in the analysis of this data.
 
 # Analysis
 The statistical analysis of the data.
+The mean alcohol content of beer is 4.5%.
+
 
 *todo*
 
