@@ -1,0 +1,28 @@
+
+3.Report the number of NA's in each column.
+
+```{r, echo=FALSE, message=FALSE}
+
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+colnames(beers) <- c("Beer_Name","Beer_ID","ABV","IBU","Brewery_ID","Style","Ounces")
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white = TRUE)
+colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
+
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+
+t_brewery_na <- data.frame(add_rownames(data.frame(sapply(brewery_beer, function(x) sum(is.na(x))), sapply(brewery_beer, function(x) sum(!is.na(x))), sapply(brewery_beer, function(x) sum(is.null(x))), sapply(brewery_beer, function(x) sum(n_distinct(x)))), "VALUE"))
+colnames(t_brewery_na) <- c("Column","NA_totals","Not_NA_totals","Null_totals","Unique_totals")
+
+pandoc.table(caption = "NA, Not NA, Null and Unique Total Counts", t_brewery_na, style = "grid")
+
+```

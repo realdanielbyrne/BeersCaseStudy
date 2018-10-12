@@ -1,0 +1,98 @@
+
+1.How many breweries are present in each state?
+
+```{r, echo=FALSE, message=FALSE}
+
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white = TRUE)
+
+brewery_cnt = data.frame(table(breweries$State))
+colnames(brewery_cnt) <- c("abbr","total")
+
+brewery <- merge(brewery_cnt,statepop, by = "abbr", all = FALSE)[,c("fips","full","abbr","total")]
+
+brewery_northeast <- data.frame(subset(brewery, abbr == "CT"| abbr == "DC"| abbr == "DE"| abbr == "MA"| abbr == "MD"| abbr == "ME"| abbr == "NH"| abbr == "NJ"|
+                                      abbr == "NY"| abbr == "PA"| abbr == "RI"| abbr == "VT", select = fips:total))
+
+brewery_midwest <- data.frame(subset(brewery, abbr == "ND"| abbr == "NE"| abbr == "SD"| abbr == "KS"| abbr == "MN"| abbr == "MO"| abbr == "IA"| abbr == "WI"| abbr == "MI"|
+                                      abbr == "IL"| abbr == "IN"| abbr == "OH", select = fips:total))
+
+brewery_south <- data.frame(subset(brewery, abbr == "AL"| abbr == "AR"| abbr == "FL"| abbr == "GA"| abbr == "KY"| abbr == "LA"| abbr == "MS"| abbr == "NC"| abbr == "OK"| 
+                                      abbr == "SC"| abbr == "TN"| abbr == "TX"| abbr == "VA"| abbr == "WV", select = fips:total))
+
+brewery_west <- data.frame(subset(brewery, abbr == "AZ"| abbr == "CA"| abbr == "CO"| abbr == "ID"| abbr == "MT"| abbr == "NM"| abbr == "NV"| abbr == "OR"| abbr == "UT"|
+                                      abbr == "WA"| abbr == "WY", select = fips:total))
+
+brewery_nc <- data.frame(subset(brewery, abbr == "AK"| abbr == "HI", select = fips:total))
+
+new_map <- function (regions = c("states", "state", "counties", "county"), include = c(), data = data.frame(), values = "values", 
+                     lines = "black", labels = FALSE, label_color = "black", label = label) 
+        {
+        regions_ <- match.arg(regions)
+        
+        map_df <- map_with_data(data, values = values, include = include)
+         
+        polygon_layer <- ggplot2::geom_polygon(ggplot2::aes(x = map_df$long, y = map_df$lat, group = map_df$group, fill = map_df[,values]), colour = lines, size = 0.4)
+        
+        if (labels) 
+          {
+          centroid_labels <- utils::read.csv(system.file("extdata", paste0("us_", regions_, "_centroids.csv"), package = "usmap"), 
+                 colClasses = c("numeric", "numeric", "character", "character", "character"), stringsAsFactors = FALSE)
+          if (length(include) > 0) 
+            {                 
+            centroid_labels <- centroid_labels[centroid_labels$full %in% include | centroid_labels$abbr %in% include | centroid_labels$fips %in% include, ]
+            }
+          label_layer <- ggplot2::geom_text(data = centroid_labels, ggplot2::aes(x = centroid_labels$x, y = centroid_labels$y, label = label), colour = label_color)
+          }
+        else {
+          label_layer <- ggplot2::geom_blank()
+          }
+        ggplot2::ggplot(data = map_df) + polygon_layer + label_layer + ggplot2::coord_equal()
+        }
+
+new_map(data = brewery, values = "total", include = c(),label = brewery$total, lines = "red") + 
+  scale_fill_viridis_c(option = "magma", name = "Brewery Count") + 
+  theme_void() + 
+  ggtitle("US Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+new_map(data = brewery_northeast, values = "total", include = c("CT","DC","DE","MA","MD","ME","NH","NJ","NY","PA","RI","VT"), labels = TRUE, label = brewery_northeast$total, lines = "red") + 
+  scale_fill_viridis_c() + 
+  theme_void() + 
+  ggtitle("Northeast Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_midwest, values = "total", include = c("ND","NE","SD","KS","MN","MO","IA","WI","MI","IL","IN","OH"), labels = TRUE, label = brewery_midwest$total, lines = "red") +
+  scale_fill_continuous(type = "viridis") + 
+  theme_void() + 
+  ggtitle("Northeast Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_south, values = "total", include = c("AL","AR","FL","GA","KY","LA","MS","NC","OK","SC","TN","TX","VA","WV"), labels = TRUE, label = brewery_south$total, lines = "red") + 
+  scale_fill_viridis_c(option = "plasma") + 
+  theme_void() + ggtitle("Southern Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_west, values = "total", include = c("AZ","CA","CO","ID","MT","NM","NV","OR","UT","WA","WY"), labels = TRUE, label = brewery_west$total, lines = "red") + 
+  theme_void() + 
+  ggtitle("Western Breweries by State") + 
+  scale_fill_continuous() + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_nc, values = "total", include = c("HI","AK"), labels = TRUE, label = brewery_nc$total, lines = "red") + 
+  theme_void() + 
+  ggtitle("Hawaii and Alaska Breweries by State") + 
+  scale_fill_viridis_c(option = "viridis") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+```

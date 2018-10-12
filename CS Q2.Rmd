@@ -1,0 +1,32 @@
+
+2.Merge beer data with the breweries data. Print the first 6 observations and the last six observations to check the merged file.
+
+```{r, echo=FALSE, message=FALSE}
+
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+colnames(beers) <- c("Beer_Name","Beer_ID","ABV","IBU","Brewery_ID","Style","Ounces")
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white = TRUE)
+colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
+
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+
+top_bot_brewery <- rbind(
+        data.frame(head(brewery_beer, n = 6L))[,c("Brewery_Name","City","State","Beer_Name","ABV","IBU","Style","Ounces")],
+        data.frame(tail(brewery_beer, n = 6L))[,c("Brewery_Name","City","State","Beer_Name","ABV","IBU","Style","Ounces")])
+
+kable(top_bot_brewery, align = "c", col.names = c("Brewery","City","State","Beer","Alcohol by Volume","International Bitterness Unit","Style","Ounces"), row.names = FALSE) %>% 
+  kable_styling("striped", full_width = F) %>% 
+  group_rows("Top Six Observations", 1,6, colnum = NULL, bold = T, label_row_css = "text-align: center") %>% 
+  group_rows("Bottom Six Observations", 7,12, colnum = NULL, bold = T, label_row_css = "text-align: center")
+
+```
