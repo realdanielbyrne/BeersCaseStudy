@@ -1,17 +1,11 @@
 # Beers Case Study
-  
-    2018-08-26 MSDS 6306 
-    Doing Data Science
-    Case Study 1
+    Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location 
     Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
 # Introduction
-*todo*
+Given the raw data on Beer provided by the research department, our team was asked to analyze the data for patterns that could be used in developing new marketing opportunities.
 
-# Code Modules 
-A brief introduction to the code modules used in the analysis of this data.
-
-*todo*
+In particular we were asked to tally and vizualize the number of craft breweries by state, summarize the statistical parameters of alcohol and bitterness, and the relationships of these parameters with each other and with the States in which they were produced. 
 
 # Analysis
 The statistical analysis of the data.
