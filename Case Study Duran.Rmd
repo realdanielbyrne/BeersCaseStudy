@@ -1,0 +1,72 @@
+---
+title: "Case Study"
+author: "Joanna Duran"
+date: "October 7, 2018"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+*Import files
+```{r import, echo=TRUE}
+beers<-read.csv("C:/Users/JEngi/Desktop/Doing data science/Beers.csv", stringsAsFactors = FALSE, header = TRUE)
+breweries<-read.csv("C:/Users/JEngi/Desktop/Doing data science/Breweries.csv", stringsAsFactors = FALSE, header = TRUE)
+```
+```
+
+```
+*Beers present in each state
+```
+```
+*Change column name to match so I can merge data
+
+```{r name, echo=TRUE}
+ names(breweries)[names(breweries)=="Brew_ID"]<-"Brewery_id"
+```
+*Merge Data
+```{r merge, echo=TRUE}
+beersnbrews<-merge(x=beers, y=breweries, by="Brewery_id", all=TRUE)
+```
+
+*Print first 6 and last 6 observations
+```{r head, echo=TRUE}
+head(beersnbrews,6)
+```
+
+
+```{r tail, echo=TRUE}
+tail(beersnbrews,6)
+```
+
+
+```
+```
+ReportNumber of NAs in each column
+```{r NAs, echo=TRUE}
+colSums(is.na(beersnbrews))
+```
+
+
+Compute the median alcohol content and international bitterness unit for each state. Plot a bar chart to compare.
+```{r medalcohol, echo=TRUE}
+medabv<-tapply(beersnbrews$ABV,beersnbrews$State, median)
+barplot(medabv)
+medibu<-tapply(beersnbrews$IBU,beersnbrews$State, median)
+barplot(medibu)
+
+```
+
+Which state has the maximum alcoholic (ABV) beer? Which state has the most bitter (IBU) beer?
+```{r stateABV, echo=TRUE}
+```
+
+Summary statistics for the ABV variable.
+```{r summaryABV, echo=TRUE}
+summary(beersnbrews$ABV)
+```
+
+Is there an apparent relationship between the bitterness of the beer and its alcoholic content? Draw a scatter plot.
+```{r bitvcont, echo=TRUE}
+plot(beersnbrews$ABV,beersnbrews$IBU)
+```
