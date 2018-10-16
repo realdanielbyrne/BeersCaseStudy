@@ -9,12 +9,12 @@ output:
 
 
 # Preface
-Anheuser-Busch Companies, LLC , the Client, in coordination with Byrne, Durant Norton Research LLP 
+Anheuser-Busch Companies, LLC, the Client, in coordination with Byrne, Durant Norton Research LLP 
 pursuant to Statement of Work number 1016, is evaluating statistical data on craft beers
 for Anheuser Busch to use in market research.
 
 Our company was presented the raw data on U.S. microbrewery beers provided by the Client's market 
-research department, and asked to analyze the data for patterns that could be used in
+research department and asked to analyze the data for patterns that could be used in
 developing new marketing opportunities.
 
 # Introduction
@@ -196,7 +196,7 @@ The alcohol content of the beers in the study ranged from ~.001% to 12% with the
 </table>
 
 #### Summary IBU variable
-The IBU profile of the beers in the study was broader with a greater variance, and a decidedly right skewed curve.
+The IBU profile of the beers in the study was broader with a greater variance and a decidedly right skewed curve.
 
 ![](_imgs/report-unnamed-chunk-3-1.png)<!-- -->![](_imgs/report-unnamed-chunk-3-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">IBU Statistics</caption>
@@ -228,7 +228,7 @@ The IBU profile of the beers in the study was broader with a greater variance, a
 </tbody>
 </table>
 ### Microbreweries by State
-We joined the two datasets on the brewery id, and analyzed the beer by state.
+We joined the two datasets on the brewery id and analyzed the beer by state.
 
 <table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Merged Data Summary</caption>
