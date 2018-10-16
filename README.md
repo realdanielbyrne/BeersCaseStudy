@@ -1,6 +1,5 @@
 # Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
-[Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location](./report.md)
-
+[Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location](./report.md)<br />
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
 # Description
