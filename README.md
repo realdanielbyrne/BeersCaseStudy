@@ -26,9 +26,9 @@ Creates an analysis of the two datasets to demonstrate findings, vizualizes the 
 * install.packages("formattable")
 
 # Usage
-## library(knitr)
-## ?knit
-## knit(input)
+library(knitr)
+?knit
+knit(input)
 
 # Raw Tables
 #### Beers.csv
