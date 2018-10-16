@@ -1,9 +1,10 @@
 # Beers Case Study
-Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location 
+Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
+
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
 # Purpose
-  The research department provided us with two data sets that we were asked to analyze that would be beneficial in identifying new market opportunities within the craft beer segment.
+	The research department provided us with two data sets that we were asked to analyze that would be beneficial in identifying new market opportunities within the craft beer segment.
   
   The raw data for this study was provided in the form of two csv files, `beers.csv` and `breweries.csv`.  We then needed to join the two tables together so that we would be able to determine which beers belong to a particular brewery and which state it was produced.
   
