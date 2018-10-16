@@ -26,8 +26,8 @@ Creates an analysis of the two datasets to demonstrate findings, vizualizes the 
 * install.packages("formattable")
 
 # Usage
-library(knitr)__
-?knit__
+library(knitr) <br />
+?knit <br />
 knit(input)
 
 # Raw Tables
