@@ -143,12 +143,12 @@ ibuByState <- ibuByState[order(ibuByState$median,decreasing = TRUE),]
 abvByState <- abvByState[order(abvByState$median,decreasing = TRUE),]
 
 # chart and plot top 10 median IBU by State
-gf_col(median~State,data=head(ibuByState,10), color=~median,title="Top 10 Median IBU by State")
+gf_col(median~State,data=head(ibuByState,10), color=~median,fill =~median, title="Top 10 Median IBU by State")
 kable(head(ibuByState,10), align = "l", row.names = FALSE, caption="Top 10 Median IBU by State") %>%
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
 
 # chart and plot top 10 median ABV by State
-gf_col(median~State,data=head(abvByState,10),color=~median, title="Top 10 Median ABV by State")
+gf_col(median~State,data=head(abvByState,10),color=~median,fill=~median, title="Top 10 Median ABV by State")
 kable(head(abvByState,10), align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
 
@@ -184,6 +184,15 @@ abv_ibu_map(data = ibu_beer, values = "IBU", include = c(ibu_beer$fips), label =
 ### Summary statistics for the ABV variable
 ```{r,echo=FALSE,warning=FALSE}
 abvsummary <- favstats(~ABV,data=brewery_beer)
+gf_boxplot(~ABV,data=brewery_beer,fill="yellow",outlier.color = "red")
+kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
+```
+
+### Summary statistics for the IBU variable
+```{r,echo=FALSE,warning=FALSE}
+abvsummary <- favstats(~IBU,data=brewery_beer)
+gf_boxplot(~IBU,data=brewery_beer,fill="green",outlier.fill="red")
 kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
 ```

@@ -8,16 +8,10 @@ output:
 ---
 
 
-# Background
-According to Brewers Association for Small and Independent Craft Brewers the overall U.S. beer volume sales were down 1% in 2017, whereas craft brewer sales continued to grow at a rate of 5% by volume, reaching 12.7% of the U.S. beer market by volume. Craft production grew the most for microbreweries.Retail dollar sales of craft increased 8%, up to $26.0 billion, and now account for more than 23% of the $111.4 billion U.S. beer market.
-https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
-
 # Introduction
-While Anheuser Busch still has a large market share, craft breweries are on the rise and are a threat to future market share.
-
 Our team was presented the raw data on U.S. microbrewery beers provided by the market research department, and asked asked to analyze the data for patterns that could be used in developing new marketing opportunities.
 
-In particular we were asked to tally and vizualize the number of craft breweries by state, summarize the statistical parameters of alcohol and bitterness, and the relationships of these parameters with each other and with the States in which they were produced.
+In particular we were asked to tally and vizualize the number of craft breweries by state, summarize the statistical parameters of alcohol and bitterness, and the relationships of these parameters with each other and with the States in which they were produced. 
 
 # Analysis
 
@@ -535,7 +529,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 ![](_imgs/report-unnamed-chunk-5-1.png)<!-- -->![](_imgs/report-unnamed-chunk-5-2.png)<!-- -->
 
 ### Summary statistics for the ABV variable
-<table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+![](_imgs/report-unnamed-chunk-6-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
  <thead>
   <tr>
@@ -565,12 +559,36 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </tbody>
 </table>
 
+### Summary statistics for the IBU variable
+![](_imgs/report-unnamed-chunk-7-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 21 </td>
+   <td style="text-align:left;"> 35 </td>
+   <td style="text-align:left;"> 64 </td>
+   <td style="text-align:left;"> 138 </td>
+   <td style="text-align:left;"> 42.71317 </td>
+   <td style="text-align:left;"> 25.95407 </td>
+   <td style="text-align:left;"> 1405 </td>
+   <td style="text-align:left;"> 1005 </td>
+  </tr>
+</tbody>
+</table>
+
 ### Relationship between IBU and ABV
-![](_imgs/report-unnamed-chunk-7-1.png)<!-- -->
-
-# Summary
-Your top selling beers, Bud Light and Budweiser are under the median ABVs and IBUs as compared to craft beers.
-
-A Cost/Benefit Analysis would be beneficial to explore higher ABV/ IBU markets.
-
-We also recommend an in depth analysis of Colorado to explore possible acquisitions
+![](_imgs/report-unnamed-chunk-8-1.png)<!-- -->
