@@ -1,5 +1,6 @@
 # Beers Case Study
 Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
+
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
 https://github.com/realdanielbyrne/BeersCaseStudy/blob/master/report.md
