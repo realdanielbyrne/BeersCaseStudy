@@ -8,19 +8,272 @@ output:
 ---
 
 
-# Introduction
-Our team was presented the raw data on U.S. microbrewery beers provided by the market research department, and asked asked to analyze the data for patterns that could be used in developing new marketing opportunities.
+# Preface
+Anheuser Busch inc, the Client, in coordination with Byrne, Durant Norton reseach LLP 
+pursuant to Statement of Work number 1016, is evaluating statistical data on craft beers
+for Anheuser Busch to use in market research.
 
-In particular we were asked to tally and vizualize the number of craft breweries by state, summarize the statistical parameters of alcohol and bitterness, and the relationships of these parameters with each other and with the States in which they were produced. 
+Our company was presented the raw data on U.S. microbrewery beers provided by the Client's market 
+research department, and asked asked to analyze the data for patterns that could be used in
+developing new marketing opportunities.
+
+# Introduction
+This "Request For Comment", RFC, document  is being issued as an attempt to
+stimulate a dialog on new market opportunituies in the ever growing microbrewery market.
+In particular this RFC considers the raw beer statistics provided in the `beers.csv` and
+`breweries.csv` provided to us by our Client and analyzes these data for possible trends
+to lay the groundwork for possible aquisitions and marketing campaings.  
+
+In particular we were asked to tally and vizualize the number of craft breweries by state,
+summarize the statistical parameters of alcohol and bitterness of regional beers, and to 
+identify any relationships of these parameters with each other and with the States in which
+they were produced. 
+
+# Background
+According to Brewers Association for Small and Independent Craft Brewers the overall U.S. beer
+volume sales were down 1% in 2017, whereas craft brewer sales continued to grow at a rate of 5%
+by volume, reaching 12.7% of the U.S. beer market by volume. Specifically 'Craft' production grew
+the most.
+
+Specifically 'Craft' production grew the most. Retail dollar sales of craft brews increased 8%,
+yar over year up to $26.0 billion. Craft brews now account for a quarter of the $111.4
+billion U.S. beer market.
+
+While Anheuser Busch still has a large market share, craft breweries are on the rise and are a
+threat to future market share.  However, Anheuser Busch has had recent successes in purchasing 
+regional craft breweries, retaining their labnel and naming rights, but distributing these brews either
+regionally or nationally as local and national preferences dictate.
+
+[https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
+](https://www.brewersassociation.org/statistics/national-beer-sales-production-data/)
 
 # Analysis
 
+## The Data Basics
+We noticed a few abnormalities in the datasets. 1005 out of 2410 (41.7% ) beers did not have an IBU value. 62 out of 2410 (2.57%) beers did not have a ABV value. Beers with missing values are not represented
+in the analysis.
+
+<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">NA, Not NA, Null and Unique Total Counts</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Column </th>
+   <th style="text-align:left;"> NA_totals </th>
+   <th style="text-align:left;"> Not_NA_totals </th>
+   <th style="text-align:left;"> Null_totals </th>
+   <th style="text-align:left;"> Unique_totals </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Brewery_ID </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 558 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Brewery_Name </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 551 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> City </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 384 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> State </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Beer_Name </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2304 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Beer_ID </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ABV </td>
+   <td style="text-align:left;"> 62 </td>
+   <td style="text-align:left;"> 2348 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 75 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> IBU </td>
+   <td style="text-align:left;"> 1005 </td>
+   <td style="text-align:left;"> 1405 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 108 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Style </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 100 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Ounces </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 2410 </td>
+   <td style="text-align:left;"> 0 </td>
+   <td style="text-align:left;"> 7 </td>
+  </tr>
+</tbody>
+</table>
+
+#### Summary ABV variable
+The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%.
+
+![](_imgs/report-unnamed-chunk-2-1.png)<!-- -->![](_imgs/report-unnamed-chunk-2-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">ABV Statistics</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0.001 </td>
+   <td style="text-align:left;"> 0.05 </td>
+   <td style="text-align:left;"> 0.056 </td>
+   <td style="text-align:left;"> 0.067 </td>
+   <td style="text-align:left;"> 0.128 </td>
+   <td style="text-align:left;"> 0.0597734 </td>
+   <td style="text-align:left;"> 0.0135417 </td>
+   <td style="text-align:left;"> 2348 </td>
+   <td style="text-align:left;"> 62 </td>
+  </tr>
+</tbody>
+</table>
+
+#### Summary IBU variable
+The IBU profile of the beers in the study was broader with a greater variance, and a decidedly right skewed curve.
+
+![](_imgs/report-unnamed-chunk-3-1.png)<!-- -->![](_imgs/report-unnamed-chunk-3-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">IBU Statistics</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 4 </td>
+   <td style="text-align:left;"> 21 </td>
+   <td style="text-align:left;"> 35 </td>
+   <td style="text-align:left;"> 64 </td>
+   <td style="text-align:left;"> 138 </td>
+   <td style="text-align:left;"> 42.71317 </td>
+   <td style="text-align:left;"> 25.95407 </td>
+   <td style="text-align:left;"> 1405 </td>
+   <td style="text-align:left;"> 1005 </td>
+  </tr>
+</tbody>
+</table>
+
 ### Microbreweries by State
-![](_imgs/report-unnamed-chunk-1-1.png)<!-- -->![](_imgs/report-unnamed-chunk-1-2.png)<!-- -->![](_imgs/report-unnamed-chunk-1-3.png)<!-- -->![](_imgs/report-unnamed-chunk-1-4.png)<!-- -->![](_imgs/report-unnamed-chunk-1-5.png)<!-- -->![](_imgs/report-unnamed-chunk-1-6.png)<!-- -->
+From the data available it was difficult to determine the density of breweries except for broadly by state.
+As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
+toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries.
+We reccommend further investigation of the relationship between breweries and location, possibly supplemented
+with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
+
+![](_imgs/report-unnamed-chunk-4-1.png)<!-- -->![](_imgs/report-unnamed-chunk-4-2.png)<!-- -->![](_imgs/report-unnamed-chunk-4-3.png)<!-- -->![](_imgs/report-unnamed-chunk-4-4.png)<!-- -->![](_imgs/report-unnamed-chunk-4-5.png)<!-- -->![](_imgs/report-unnamed-chunk-4-6.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0.001 </td>
+   <td style="text-align:left;"> 0.05 </td>
+   <td style="text-align:left;"> 0.056 </td>
+   <td style="text-align:left;"> 0.067 </td>
+   <td style="text-align:left;"> 0.128 </td>
+   <td style="text-align:left;"> 0.0597734 </td>
+   <td style="text-align:left;"> 0.0135417 </td>
+   <td style="text-align:left;"> 2348 </td>
+   <td style="text-align:left;"> 62 </td>
+  </tr>
+</tbody>
+</table>
+
+<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0.001 </td>
+   <td style="text-align:left;"> 0.05 </td>
+   <td style="text-align:left;"> 0.056 </td>
+   <td style="text-align:left;"> 0.067 </td>
+   <td style="text-align:left;"> 0.128 </td>
+   <td style="text-align:left;"> 0.0597734 </td>
+   <td style="text-align:left;"> 0.0135417 </td>
+   <td style="text-align:left;"> 2348 </td>
+   <td style="text-align:left;"> 62 </td>
+  </tr>
+</tbody>
+</table>
 
 
 ### Merged Beer and Brewery Data Summary
-<table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
  <thead>
   <tr>
    <th style="text-align:left;"> Brewery </th>
@@ -160,7 +413,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </table>
 
 ### NA's Report
-<table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">NA, Not NA, Null and Unique Total Counts</caption>
  <thead>
   <tr>
@@ -245,7 +498,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </tbody>
 </table>
 ### Statistical Analysis of Beer Variables by State
-![](_imgs/report-unnamed-chunk-4-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+![](_imgs/report-unnamed-chunk-7-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median IBU by State</caption>
  <thead>
   <tr>
@@ -385,7 +638,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </tbody>
 </table>
 
-![](_imgs/report-unnamed-chunk-4-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+![](_imgs/report-unnamed-chunk-7-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
  <thead>
   <tr>
@@ -526,69 +779,8 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </table>
 
 ### State Maximums
-![](_imgs/report-unnamed-chunk-5-1.png)<!-- -->![](_imgs/report-unnamed-chunk-5-2.png)<!-- -->
+![](_imgs/report-unnamed-chunk-8-1.png)<!-- -->![](_imgs/report-unnamed-chunk-8-2.png)<!-- -->
 
-### Summary statistics for the ABV variable
-![](_imgs/report-unnamed-chunk-6-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
-<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> min </th>
-   <th style="text-align:left;"> Q1 </th>
-   <th style="text-align:left;"> median </th>
-   <th style="text-align:left;"> Q3 </th>
-   <th style="text-align:left;"> max </th>
-   <th style="text-align:left;"> mean </th>
-   <th style="text-align:left;"> sd </th>
-   <th style="text-align:left;"> n </th>
-   <th style="text-align:left;"> missing </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 0.001 </td>
-   <td style="text-align:left;"> 0.05 </td>
-   <td style="text-align:left;"> 0.056 </td>
-   <td style="text-align:left;"> 0.067 </td>
-   <td style="text-align:left;"> 0.128 </td>
-   <td style="text-align:left;"> 0.0597734 </td>
-   <td style="text-align:left;"> 0.0135417 </td>
-   <td style="text-align:left;"> 2348 </td>
-   <td style="text-align:left;"> 62 </td>
-  </tr>
-</tbody>
-</table>
-
-### Summary statistics for the IBU variable
-![](_imgs/report-unnamed-chunk-7-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
-<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> min </th>
-   <th style="text-align:left;"> Q1 </th>
-   <th style="text-align:left;"> median </th>
-   <th style="text-align:left;"> Q3 </th>
-   <th style="text-align:left;"> max </th>
-   <th style="text-align:left;"> mean </th>
-   <th style="text-align:left;"> sd </th>
-   <th style="text-align:left;"> n </th>
-   <th style="text-align:left;"> missing </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 4 </td>
-   <td style="text-align:left;"> 21 </td>
-   <td style="text-align:left;"> 35 </td>
-   <td style="text-align:left;"> 64 </td>
-   <td style="text-align:left;"> 138 </td>
-   <td style="text-align:left;"> 42.71317 </td>
-   <td style="text-align:left;"> 25.95407 </td>
-   <td style="text-align:left;"> 1405 </td>
-   <td style="text-align:left;"> 1005 </td>
-  </tr>
-</tbody>
-</table>
 
 ### Relationship between IBU and ABV
-![](_imgs/report-unnamed-chunk-8-1.png)<!-- -->
+![](_imgs/report-unnamed-chunk-9-1.png)<!-- -->

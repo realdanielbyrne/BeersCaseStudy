@@ -36,11 +36,12 @@ brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
 ```
 # Preface
 Anheuser Busch inc, the Client, in coordination with Byrne, Durant Norton reseach LLP 
-pursuant to Statement of Work number 29155, is evaluating statistical data on beers
-for Anheuser Busch to use in Market Research.
+pursuant to Statement of Work number 1016, is evaluating statistical data on craft beers
+for Anheuser Busch to use in market research.
 
-Our team was presented the raw data on U.S. microbrewery beers provided by the market 
-research department, and asked asked to analyze the data for patterns that could be used in developing new marketing opportunities.
+Our company was presented the raw data on U.S. microbrewery beers provided by the Client's market 
+research department, and asked asked to analyze the data for patterns that could be used in
+developing new marketing opportunities.
 
 # Introduction
 This "Request For Comment", RFC, document  is being issued as an attempt to
@@ -64,12 +65,65 @@ Specifically 'Craft' production grew the most. Retail dollar sales of craft brew
 yar over year up to $26.0 billion. Craft brews now account for a quarter of the $111.4
 billion U.S. beer market.
 
+While Anheuser Busch still has a large market share, craft breweries are on the rise and are a
+threat to future market share.  However, Anheuser Busch has had recent successes in purchasing 
+regional craft breweries, retaining their labnel and naming rights, but distributing these brews either
+regionally or nationally as local and national preferences dictate.
+
 [https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
 ](https://www.brewersassociation.org/statistics/national-beer-sales-production-data/)
 
 # Analysis
 
+## The Data Basics
+We noticed a few abnormalities in the datasets. 1005 out of 2410 (41.7% ) beers did not have an IBU value. 62 out of 2410 (2.57%) beers did not have a ABV value. Beers with missing values are not represented
+in the analysis.
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+# Count na, notna, null, and distinct values
+t_brewery_na <- data.frame(add_rownames(data.frame(
+  sapply(brewery_beer, function(x) sum(is.na(x))), 
+  sapply(brewery_beer, function(x) sum(!is.na(x))),
+  sapply(brewery_beer, function(x) sum(is.null(x))),
+  sapply(brewery_beer, function(x) sum(n_distinct(x)))),
+  "VALUE"))
+
+colnames(t_brewery_na) <- c("Column","NA_totals","Not_NA_totals","Null_totals","Unique_totals")
+kable(t_brewery_na, align = "l", caption = "NA, Not NA, Null and Unique Total Counts", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
+#### Summary ABV variable
+The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%.
+
+```{r,echo=FALSE,warning=FALSE}
+abvsummary <- favstats(~ABV,data=brewery_beer)
+#gf_boxplot(~ABV,data=brewery_beer,fill="yellow",outlier.color = "red")
+bwplot(~ABV,data=brewery_beer)
+densityplot(~ABV,data=brewery_beer)
+kable(abvsummary, align = "l", caption = "ABV Statistics", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
+#### Summary IBU variable
+The IBU profile of the beers in the study was broader with a greater variance, and a decidedly right skewed curve.
+
+```{r,echo=FALSE,warning=FALSE}
+ibusummary <- favstats(~IBU,data=brewery_beer)
+#gf_boxplot(~IBU,data=brewery_beer,fill="green",outlier.fill="red")
+bwplot(~IBU,data=brewery_beer)
+densityplot(~IBU,data=brewery_beer)
+kable(ibusummary, align = "l", caption = "IBU Statistics", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
 ### Microbreweries by State
+From the data available it was difficult to determine the density of breweries except for broadly by state.
+As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
+toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries.
+We reccommend further investigation of the relationship between breweries and location, possibly supplemented
+with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
+
 ```{r,echo=FALSE,message=FALSE}
 brewery_cnt = data.frame(table(breweries$State))
 colnames(brewery_cnt) <- c("abbr","total")
@@ -127,6 +181,12 @@ new_map(data = brewery_nc, values = "total", include = nc, labels = TRUE, label 
   scale_fill_viridis_c(option = "viridis") + 
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
 
+kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+
+kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+
 ```
 
 
@@ -141,7 +201,7 @@ top_bot_brewery <- rbind(
 
 # Format table
 kable(top_bot_brewery, align = "l", col.names = c("Brewery","City","State","Beer","ABV","IBU","Style","Ounces"), row.names = FALSE) %>% 
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12) %>% 
   group_rows("Top Six Observations", 1,6, colnum = NULL, bold = T, label_row_css = "text-align: center") %>% 
   group_rows("Bottom Six Observations", 7,12, colnum = NULL, bold = T, label_row_css = "text-align: center")
 ```
@@ -158,7 +218,7 @@ t_brewery_na <- data.frame(add_rownames(data.frame(
 
 colnames(t_brewery_na) <- c("Column","NA_totals","Not_NA_totals","Null_totals","Unique_totals")
 kable(t_brewery_na, align = "l", caption = "NA, Not NA, Null and Unique Total Counts", row.names = FALSE) %>% 
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
 ```
 ### Statistical Analysis of Beer Variables by State
 ```{r, echo=FALSE,warning=FALSE}
@@ -172,13 +232,12 @@ abvByState <- abvByState[order(abvByState$median,decreasing = TRUE),]
 # chart and plot top 10 median IBU by State
 gf_col(median~State,data=head(ibuByState,10), color=~median,fill =~median, title="Top 10 Median IBU by State")
 kable(head(ibuByState,10), align = "l", row.names = FALSE, caption="Top 10 Median IBU by State") %>%
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
 
 # chart and plot top 10 median ABV by State
 gf_col(median~State,data=head(abvByState,10),color=~median,fill=~median, title="Top 10 Median ABV by State")
 kable(head(abvByState,10), align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
-
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
 ```
 
 ### State Maximums
@@ -208,21 +267,6 @@ abv_ibu_map(data = ibu_beer, values = "IBU", include = c(ibu_beer$fips), label =
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
 ```
 
-### Summary statistics for the ABV variable
-```{r,echo=FALSE,warning=FALSE}
-abvsummary <- favstats(~ABV,data=brewery_beer)
-gf_boxplot(~ABV,data=brewery_beer,fill="yellow",outlier.color = "red")
-kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
-```
-
-### Summary statistics for the IBU variable
-```{r,echo=FALSE,warning=FALSE}
-abvsummary <- favstats(~IBU,data=brewery_beer)
-gf_boxplot(~IBU,data=brewery_beer,fill="green",outlier.fill="red")
-kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
-```
 
 ### Relationship between IBU and ABV
 ```{r,echo=FALSE,warning=FALSE}
