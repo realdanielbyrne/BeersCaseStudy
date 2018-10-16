@@ -1,0 +1,294 @@
+---
+title: "A Statistical Analysis of U.S. Beer Bitterness, Alcohol Content and State of Origin"
+author: "Daniel Byrne, Joanna Duran, Matthew Norton"
+date: "October 15, 2018"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.path = "_imgs/report-")
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+library(tidyr)
+library(mosaic)
+library(ggformula)
+library(formattable)
+
+# load data
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+colnames(beers) <-c("Beer_Name","Beer_ID","ABV","IBU","Brewery_ID","Style","Ounces")
+
+beers$Brewery_ID <-as.character(beers$Brewery_ID)
+beers$Beer_ID <-as.character(beers$Beer_ID)
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white=TRUE)
+colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
+breweries$Brewery_ID <- as.character(breweries$Brewery_ID)
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+```
+# Preface
+Anheuser Busch inc, the Client, in coordination with Byrne, Durant Norton reseach LLP 
+pursuant to Statement of Work number 1016, is evaluating statistical data on craft beers
+for Anheuser Busch to use in market research.
+
+Our company was presented the raw data on U.S. microbrewery beers provided by the Client's market 
+research department, and asked asked to analyze the data for patterns that could be used in
+developing new marketing opportunities.
+
+# Introduction
+This "Request For Comment", RFC, document  is being issued as an attempt to
+stimulate a dialog on new market opportunituies in the ever growing microbrewery market.
+In particular this RFC considers the raw beer statistics provided in the `beers.csv` and
+`breweries.csv` provided to us by our Client and analyzes these data for possible trends
+to lay the groundwork for possible aquisitions and marketing campaings.  
+
+In particular we were asked to tally and vizualize the number of craft breweries by state,
+summarize the statistical parameters of alcohol and bitterness of regional beers, and to 
+identify any relationships of these parameters with each other and with the States in which
+they were produced. 
+
+# Background
+According to Brewers Association for Small and Independent Craft Brewers the overall U.S. beer
+volume sales were down 1% in 2017, whereas craft brewer sales continued to grow at a rate of 5%
+by volume, reaching 12.7% of the U.S. beer market by volume. Specifically 'Craft' production grew
+the most.
+
+Specifically 'Craft' production grew the most. Retail dollar sales of craft brews increased 8%,
+yar over year up to $26.0 billion. Craft brews now account for a quarter of the $111.4
+billion U.S. beer market.
+
+While Anheuser Busch still has a large market share, craft breweries are on the rise and are a
+threat to future market share.  However, Anheuser Busch has had recent successes in purchasing 
+regional craft breweries, retaining their labnel and naming rights, but distributing these brews either
+regionally or nationally as local and national preferences dictate.
+
+[https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
+](https://www.brewersassociation.org/statistics/national-beer-sales-production-data/)
+
+# Analysis
+
+The data provided consisted of two csv files, [beers.csv](./beers.csv) and [breweries.csv](./beers.csv)
+containing a sampling of information on craft beers and breweries across the United States.
+
+##### Beers.csv
+The Beers dataset contains a list of 2410 US craft beers.
+
+- *Name:* Name of the beer.
+- *Beer_ID:* Unique identifier of the beer.
+- *ABV:* Alcohol by volume of the beer.
+- *IBU:* International Bitterness Units of the beer.
+- *Brewery_ID:* Brewery id associated with the beer.
+- *Style:* Style of the beer.
+- *Ounces:* Ounces of beer.
+
+##### Breweries.csv
+The Breweries dataset contains 558 US breweries. 
+
+- *Brew_ID:* Unique identifier of the brewery.
+- *Name:* Name of the brewery.
+- *City:* City where the brewery is located.
+- *State:* State where the brewery is located.
+
+We noticed a few abnormalities in the datasets. 
+
+- 1005 out of 2410 (41.7% ) beers did not have an IBU value.
+- 62 out of 2410 (2.57%) beers did not have a ABV value. 
+
+Beers with missing values are not represented in the analysis.
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+# Count na, notna, null, and distinct values
+t_brewery_na <- data.frame(add_rownames(data.frame(
+  sapply(brewery_beer, function(x) sum(is.na(x))), 
+  sapply(brewery_beer, function(x) sum(!is.na(x))),
+  sapply(brewery_beer, function(x) sum(is.null(x))),
+  sapply(brewery_beer, function(x) sum(n_distinct(x)))),
+  "VALUE"))
+
+colnames(t_brewery_na) <- c("Column","NA_totals","Not_NA_totals","Null_totals","Unique_totals")
+kable(t_brewery_na, align = "l", caption = "NA, Not NA, Null and Unique Total Counts", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
+#### Summary ABV variable
+The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%.
+
+```{r,echo=FALSE,warning=FALSE}
+abvsummary <- favstats(~ABV,data=brewery_beer)
+#gf_boxplot(~ABV,data=brewery_beer,fill="yellow",outlier.color = "red")
+bwplot(~ABV,data=brewery_beer)
+densityplot(~ABV,data=brewery_beer)
+kable(abvsummary, align = "l", caption = "ABV Statistics", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
+#### Summary IBU variable
+The IBU profile of the beers in the study was broader with a greater variance, and a decidedly right skewed curve.
+
+```{r,echo=FALSE,warning=FALSE}
+ibusummary <- favstats(~IBU,data=brewery_beer)
+#gf_boxplot(~IBU,data=brewery_beer,fill="green",outlier.fill="red")
+bwplot(~IBU,data=brewery_beer)
+densityplot(~IBU,data=brewery_beer)
+kable(ibusummary, align = "l", caption = "IBU Statistics", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+### Analysis by State
+We joined the two datasets on the brewery id, and analysed the beer by state.
+
+```{r,echo=FALSE,message=FALSE}
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+
+# Merge head and tail subsets
+top_bot_brewery <- rbind(
+        select(head(brewery_beer),-c("Brewery_ID", "Beer_ID")),
+        select(tail(brewery_beer),-c("Brewery_ID", "Beer_ID")))
+
+# Format table
+kable(top_bot_brewery, caption="Merged Data Summary", align = "l", col.names = c("Brewery","City","State","Beer","ABV","IBU","Style","Ounces"), row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12) %>% 
+  group_rows("Top Six Observations", 1,6, colnum = NULL, bold = T, label_row_css = "text-align: center") %>% 
+  group_rows("Bottom Six Observations", 7,12, colnum = NULL, bold = T, label_row_css = "text-align: center")
+```
+
+From the data available it was difficult to determine the density of breweries except for broadly by state.
+As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
+toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries
+with a population of only 5.6 million compared with [California's population of 40 Million](https://www.census.gov/programs-surveys/popest.html).
+We reccommend further investigation of the relationship between breweries and location, possibly supplemented
+with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
+
+##### Brewery Density by State
+```{r,echo=FALSE,message=FALSE}
+brewery_cnt = data.frame(table(breweries$State))
+colnames(brewery_cnt) <- c("abbr","total")
+brewery <- merge(brewery_cnt,statepop, by = "abbr", all = FALSE)[,c("fips","full","abbr","total")]
+
+## Subset to create regional brewery maps
+northeast <-c("CT","DC","DE","MA","MD","ME","NH","NJ","NY","PA","RI","VT")
+midwest <-c("ND","NE","SD","KS","MN","MO","IA","WI","MI","IL","IN","OH")
+south <- c("AL","AR","FL","GA","KY","LA","MS","NC","OK","SC","TN","TX","VA","WV")
+west <- c("AZ","CA","CO","ID","MT","NM","NV","OR","UT","WA","WY")
+nc <- c("AK","HI")
+brewery_northeast <- filter(brewery,abbr %in% northeast)
+brewery_midwest <- filter(brewery,abbr %in% midwest)
+brewery_south <- filter(brewery,abbr %in% south)
+brewery_west <- filter(brewery,abbr %in% west)
+brewery_nc <- filter(brewery,abbr %in% nc)
+
+## Source mapfactory
+if(!exists("new_map", mode = "function"))
+    source("mapfactory.r")
+
+## Create brewery maps
+new_map(data = brewery, values = "total", include = c(),label = brewery$total, lines = "red") + 
+  scale_fill_viridis_c(option = "magma", name = "Brewery Count") + 
+  theme_void() + 
+  ggtitle("US Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5))
+
+new_map(data = brewery_northeast, values = "total", include = northeast, labels = TRUE, label = brewery_northeast$total, lines = "red") + 
+  scale_fill_viridis_c() + 
+  theme_void() + 
+  ggtitle("Northeast Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_midwest, values = "total", include = midwest, labels = TRUE, label = brewery_midwest$total, lines = "red") +
+  scale_fill_continuous(type = "viridis") + 
+  theme_void() + 
+  ggtitle("Midwest Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_south, values = "total", include = south, labels = TRUE, label = brewery_south$total, lines = "red") + 
+  scale_fill_viridis_c(option = "plasma") + 
+  theme_void() + ggtitle("Southern Breweries by State") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_west, values = "total", include = west, labels = TRUE, label = brewery_west$total, lines = "red") + 
+  theme_void() + 
+  ggtitle("Western Breweries by State") + 
+  scale_fill_continuous() + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+new_map(data = brewery_nc, values = "total", include = nc, labels = TRUE, label = brewery_nc$total, lines = "red") + 
+  theme_void() + 
+  ggtitle("Hawaii and Alaska Breweries by State") + 
+  scale_fill_viridis_c(option = "viridis") + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+
+kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
+
+##### Analysis of Beer Variables by State
+```{r, echo=FALSE,warning=FALSE}
+ibuByState <- favstats(IBU~State,data=brewery_beer)
+abvByState <- favstats(ABV~State,data=brewery_beer)
+
+#order by median
+ibuByState <- ibuByState[order(ibuByState$median,decreasing = TRUE),]
+abvByState <- abvByState[order(abvByState$median,decreasing = TRUE),]
+
+# chart and plot top 10 median IBU by State
+gf_col(median~State,data=head(ibuByState,10), color=~median,fill =~median, title="Top 10 Median IBU by State")
+kable(head(ibuByState,10), align = "l", row.names = FALSE, caption="Top 10 Median IBU by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+
+# chart and plot top 10 median ABV by State
+gf_col(median~State,data=head(abvByState,10),color=~median,fill=~median, title="Top 10 Median ABV by State")
+kable(head(abvByState,10), align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
+```
+
+
+##### State Maximums
+```{r, echo=FALSE,warning=FALSE}
+brewery_max <- merge(x=brewery_beer, y=statepop, by.x='State', by.y='abbr', all = FALSE)[,c("Brewery_Name","City","State","Beer_Name","ABV","IBU","full","fips")]
+
+brewery_max$ABV_per <- percent(brewery_max$ABV)
+
+abv_beer <- data.frame(brewery_max[which.max(brewery_max$ABV_per),])[,c("Brewery_Name","Beer_Name","ABV_per","City","State","full","fips")]
+
+ibu_beer <- data.frame(brewery_max[which.max(brewery_max$IBU),])[,c("Brewery_Name","Beer_Name","IBU","City","State","full","fips")]
+
+## Source mapfactory
+if(!exists("abv_ibu_map", mode = "function"))
+    source("mapfactory.r")
+
+abv_ibu_map(data = abv_beer, values = "ABV_per", include = c(abv_beer$fips), label = (paste0(abv_beer$full,"\n",abv_beer$ABV_per)), lines = "red") + 
+  scale_fill_continuous(na.value = "red", high = "blue") + 
+  theme_void() + 
+  ggtitle(paste0("Highest Alcohol(ABV) Beer","\n","Brewery: ",abv_beer$Brewery_Name,"\n","Beer: ",abv_beer$Beer_Name,"\n","Location: ",abv_beer$City,", ",abv_beer$State)) + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+abv_ibu_map(data = ibu_beer, values = "IBU", include = c(ibu_beer$fips), label = (paste0(ibu_beer$full,"\n",ibu_beer$IBU)), lines = "yellow") + 
+  scale_fill_continuous(na.value = "yellow", high = "green") + 
+  theme_void() + 
+  ggtitle(paste0("Bitterest(IBU) Beer","\n","Brewery: ",ibu_beer$Brewery_Name,"\n","Beer: ",ibu_beer$Beer_Name,"\n","Location: ",ibu_beer$City,", ",ibu_beer$State)) +  
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+```
+
+
+### Relationship between IBU and ABV
+```{r,echo=FALSE,warning=FALSE}
+# draw a point scatter plot showing the relationshp bewtween bitterness and alcohol content
+gf_point(IBU~ABV,data=brewery_beer,color=~ABV-IBU)
+```
+The scatter plot of ABV and IBU suggests a relationship between alcohol and bitterness.  While not performed, and Analysis of Covariance could be used to test the interaction effect strength between these two variables. 
+# Summary
+
+The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%. This hints at a potential trend towards higher alcohol content preferences.  Further, investigation along this line would be to determine whether or not there is a regional preference for beers with higher alcohol content.
+
+The concentration of breweries mirrored the population density of the states in which they were located with the notable exception of Colorado.  Colorado had the highest density of microbreweries in the study. However, our investigation of the available data did not determine a likely cause for this high concentration.  Further investigation is reccommended.

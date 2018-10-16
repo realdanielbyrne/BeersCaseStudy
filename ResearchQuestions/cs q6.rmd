@@ -1,0 +1,39 @@
+---
+title: "cs q6.rmd"
+author: "Daniel Byrne"
+date: "October 15, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE, message=FALSE}
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+library(tidyr)
+library(mosaic)
+library(ggformula)
+
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+colnames(beers) <-c("Beer_Name","Beer_ID","ABV","IBU","Brewery_ID","Style","Ounces")
+
+beers$Brewery_ID <-as.character(beers$Brewery_ID)
+beers$Beer_ID <-as.character(beers$Beer_ID)
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white=TRUE)
+colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
+breweries$Brewery_ID <- as.character(breweries$Brewery_ID)
+
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+abvsummary <- favstats(~ABV,data=brewery_beer)
+kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
+```

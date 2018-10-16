@@ -1,0 +1,48 @@
+
+5.Which state has the maximum alcoholic (ABV) beer? Which state has the bitterest (IBU) beer?
+
+```{r, echo=FALSE, message=FALSE}
+
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+library(formattable)
+
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+colnames(beers) <- c("Beer_Name","Beer_ID","ABV","IBU","Brewery_ID","Style","Ounces")
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white = TRUE)
+colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
+
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+
+brewery_max <- merge(x=brewery_beer, y=statepop, by.x='State', by.y='abbr', all = FALSE)[,c("Brewery_Name","City","State","Beer_Name","ABV","IBU","full","fips")]
+
+brewery_max$ABV_per <- percent(brewery_max$ABV)
+
+abv_beer <- data.frame(brewery_max[which.max(brewery_max$ABV_per),])[,c("Brewery_Name","Beer_Name","ABV_per","City","State","full","fips")]
+
+ibu_beer <- data.frame(brewery_max[which.max(brewery_max$IBU),])[,c("Brewery_Name","Beer_Name","IBU","City","State","full","fips")]
+
+## Source mapfactory
+if(!exists("abv_ibu_map", mode = "function"))
+    source("mapfactory.r")
+
+abv_ibu_map(data = abv_beer, values = "ABV_per", include = c(abv_beer$fips), label = (paste0(abv_beer$full,"\n",abv_beer$ABV_per)), lines = "red") + 
+  scale_fill_continuous(na.value = "red", high = "blue") + 
+  theme_void() + 
+  ggtitle(paste0("Highest Alcohol(ABV) Beer","\n","Brewery: ",abv_beer$Brewery_Name,"\n","Beer: ",abv_beer$Beer_Name,"\n","Location: ",abv_beer$City,", ",abv_beer$State)) + 
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+abv_ibu_map(data = ibu_beer, values = "IBU", include = c(ibu_beer$fips), label = (paste0(ibu_beer$full,"\n",ibu_beer$IBU)), lines = "yellow") + 
+  scale_fill_continuous(na.value = "yellow", high = "green") + 
+  theme_void() + 
+  ggtitle(paste0("Bitterest(IBU) Beer","\n","Brewery: ",ibu_beer$Brewery_Name,"\n","Beer: ",ibu_beer$Beer_Name,"\n","Location: ",ibu_beer$City,", ",ibu_beer$State)) +  
+  theme(plot.title = element_text(hjust = 0.5), legend.position="none")
+
+```

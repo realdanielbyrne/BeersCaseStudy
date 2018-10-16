@@ -1,0 +1,36 @@
+
+### NA's Report
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(knitr)
+library(pander)
+library(reshape2)
+library(usmap)
+
+beers = read.csv("beers.csv", header = TRUE,strip.white = TRUE)
+colnames(beers) <- c("Beer_Name","Beer_ID","ABV","IBU","Brewery_ID","Style","Ounces")
+beers$Brewery_ID <-as.character(beers$Brewery_ID)
+beers$Beer_ID <-as.character(beers$Beer_ID)
+
+breweries = read.csv("breweries.csv", header = TRUE,strip.white = TRUE)
+colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
+breweries$Brewery_ID <-as.character(breweries$Brewery_ID)
+
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+
+# Count na, notna, null, and distinct values
+t_brewery_na <- data.frame(add_rownames(data.frame(
+  sapply(brewery_beer, function(x) sum(is.na(x))), 
+  sapply(brewery_beer, function(x) sum(!is.na(x))),
+  sapply(brewery_beer, function(x) sum(is.null(x))),
+  sapply(brewery_beer, function(x) sum(n_distinct(x)))),
+  "VALUE"))
+
+colnames(t_brewery_na) <- c("Column","NA_totals","Not_NA_totals","Null_totals","Unique_totals")
+kable(t_brewery_na, align = "l", caption = "NA, Not NA, Null and Unique Total Counts", row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 10)
+```
