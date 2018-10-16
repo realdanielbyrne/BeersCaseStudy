@@ -2,7 +2,6 @@
 ### NA's Report
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-
 library(data.table)
 library(dplyr)
 library(ggplot2)

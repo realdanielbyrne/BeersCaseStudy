@@ -125,205 +125,235 @@ $(document).ready(function () {
 </div>
 
 
-<div id="nas-report" class="section level3">
-<h3>NA’s Report</h3>
-<table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
-<caption style="font-size: initial !important;">
-NA, Not NA, Null and Unique Total Counts
-</caption>
+<p>3.Report the number of NA’s in each column.</p>
+<pre><code>## Warning: Deprecated, use tibble::rownames_to_column() instead.</code></pre>
+<pre><code>## 
+## 
+## +--------------+-----------+---------------+-------------+---------------+
+## |    Column    | NA_totals | Not_NA_totals | Null_totals | Unique_totals |
+## +==============+===========+===============+=============+===============+
+## |  Brewery_ID  |     0     |     2410      |      0      |      558      |
+## +--------------+-----------+---------------+-------------+---------------+
+## | Brewery_Name |     0     |     2410      |      0      |      551      |
+## +--------------+-----------+---------------+-------------+---------------+
+## |     City     |     0     |     2410      |      0      |      384      |
+## +--------------+-----------+---------------+-------------+---------------+
+## |    State     |     0     |     2410      |      0      |      51       |
+## +--------------+-----------+---------------+-------------+---------------+
+## |  Beer_Name   |     0     |     2410      |      0      |     2304      |
+## +--------------+-----------+---------------+-------------+---------------+
+## |   Beer_ID    |     0     |     2410      |      0      |     2410      |
+## +--------------+-----------+---------------+-------------+---------------+
+## |     ABV      |    62     |     2348      |      0      |      75       |
+## +--------------+-----------+---------------+-------------+---------------+
+## |     IBU      |   1005    |     1405      |      0      |      108      |
+## +--------------+-----------+---------------+-------------+---------------+
+## |    Style     |     0     |     2410      |      0      |      100      |
+## +--------------+-----------+---------------+-------------+---------------+
+## |    Ounces    |     0     |     2410      |      0      |       7       |
+## +--------------+-----------+---------------+-------------+---------------+
+## 
+## Table: NA, Not NA, Null and Unique Total Counts</code></pre>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; " colspan="5">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+NA, Not NA, Null and Unique Total Counts
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;">
 Column
 </th>
-<th style="text-align:left;">
-NA_totals
+<th style="text-align:center;">
+NA Total
 </th>
-<th style="text-align:left;">
-Not_NA_totals
+<th style="text-align:center;">
+Not NA Total
 </th>
-<th style="text-align:left;">
-Null_totals
+<th style="text-align:center;">
+Null Total
 </th>
-<th style="text-align:left;">
-Unique_totals
+<th style="text-align:center;">
+Unique Total
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 Brewery_ID
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 558
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 Brewery_Name
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 551
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 City
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 384
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 State
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 51
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 Beer_Name
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2304
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 Beer_ID
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 ABV
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 62
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2348
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 IBU
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 1005
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 1405
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 108
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 Style
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 100
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:center;">
 Ounces
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 2410
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 0
 </td>
-<td style="text-align:left;">
+<td style="text-align:center;">
 7
 </td>
 </tr>
 </tbody>
 </table>
-</div>
 
 
 
