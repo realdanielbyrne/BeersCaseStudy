@@ -3,7 +3,7 @@ Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
 
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
-[report.md](.\report.md)
+[report.md](./report.md)
 
 # Description
 Creates an analysis of the two datasets to demonstrate findings, vizualizes the number of craft breweries by state, summarizes the statistical parameters of the beers by alcohol and by bitterness, and examines the relationships of these parameters by the state and as a comparision to other US craft beers.
