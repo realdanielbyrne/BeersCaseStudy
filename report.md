@@ -9,38 +9,39 @@ output:
 
 
 # Preface
-Anheuser-Busch Companies, LLC, the Client, in coordination with Byrne, Durant Norton Research LLP 
+Anheuser Busch inc, the Client, in coordination with Byrne, Durant Norton reseach LLP 
 pursuant to Statement of Work number 1016, is evaluating statistical data on craft beers
 for Anheuser Busch to use in market research.
 
 Our company was presented the raw data on U.S. microbrewery beers provided by the Client's market 
-research department and asked to analyze the data for patterns that could be used in
+research department, and asked asked to analyze the data for patterns that could be used in
 developing new marketing opportunities.
 
 # Introduction
 This "Request For Comment", RFC, document  is being issued as an attempt to
-stimulate a dialog on new market opportunities in the ever growing microbrewery market.
-This RFC considers the raw beer statistics provided in the `beers.csv` and
+stimulate a dialog on new market opportunituies in the ever growing microbrewery market.
+In particular this RFC considers the raw beer statistics provided in the `beers.csv` and
 `breweries.csv` provided to us by our Client and analyzes these data for possible trends
-to lay the groundwork for possible acquisitions and marketing campaigns.  
+to lay the groundwork for possible aquisitions and marketing campaings.  
 
-We were asked to tally and visualize the number of craft breweries by state,
+In particular we were asked to tally and vizualize the number of craft breweries by state,
 summarize the statistical parameters of alcohol and bitterness of regional beers, and to 
 identify any relationships of these parameters with each other and with the States in which
 they were produced. 
 
 # Background
-According to Brewers Association for Small and Independent Craft Brewers, the overall U.S. beer
+According to Brewers Association for Small and Independent Craft Brewers the overall U.S. beer
 volume sales were down 1% in 2017, whereas craft brewer sales continued to grow at a rate of 5%
-by volume, reaching 12.7% of the U.S. beer market by volume. 
+by volume, reaching 12.7% of the U.S. beer market by volume. Specifically 'Craft' production grew
+the most.
 
-Specifically, 'Craft' production grew the most. Retail dollar sales of craft brews increased 8%,
-year over year up to $26.0 billion. Craft brews now account for a quarter of the $111.4
+Specifically 'Craft' production grew the most. Retail dollar sales of craft brews increased 8%,
+yar over year up to $26.0 billion. Craft brews now account for a quarter of the $111.4
 billion U.S. beer market.
 
 While Anheuser Busch still has a large market share, craft breweries are on the rise and are a
 threat to future market share.  However, Anheuser Busch has had recent successes in purchasing 
-regional craft breweries, retaining their label and naming rights, but distributing these brews either
+regional craft breweries, retaining their labnel and naming rights, but distributing these brews either
 regionally or nationally as local and national preferences dictate.
 
 [https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
@@ -72,7 +73,7 @@ The Breweries dataset contains 558 US breweries.
 
 We noticed a few abnormalities in the datasets. 
 
-- 1005 out of 2410 (41.7%) beers did not have an IBU value.
+- 1005 out of 2410 (41.7% ) beers did not have an IBU value.
 - 62 out of 2410 (2.57%) beers did not have a ABV value. 
 
 Beers with missing values are not represented in the analysis.
@@ -163,7 +164,7 @@ Beers with missing values are not represented in the analysis.
 </table>
 
 #### Summary ABV variable
-The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, most of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%.
+The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%.
 
 ![](_imgs/report-unnamed-chunk-2-1.png)<!-- -->![](_imgs/report-unnamed-chunk-2-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">ABV Statistics</caption>
@@ -196,7 +197,7 @@ The alcohol content of the beers in the study ranged from ~.001% to 12% with the
 </table>
 
 #### Summary IBU variable
-The IBU profile of the beers in the study was broader with a greater variance and a decidedly right skewed curve.
+The IBU profile of the beers in the study was broader with a greater variance, and a decidedly right skewed curve.
 
 ![](_imgs/report-unnamed-chunk-3-1.png)<!-- -->![](_imgs/report-unnamed-chunk-3-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">IBU Statistics</caption>
@@ -227,8 +228,8 @@ The IBU profile of the beers in the study was broader with a greater variance an
   </tr>
 </tbody>
 </table>
-### Microbreweries by State
-We joined the two datasets on the brewery id and analyzed the beer by state.
+### Analysis by State
+We joined the two datasets on the brewery id, and analysed the beer by state.
 
 <table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Merged Data Summary</caption>
@@ -374,9 +375,10 @@ From the data available it was difficult to determine the density of breweries e
 As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
 toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries
 with a population of only 5.6 million compared with [California's population of 40 Million](https://www.census.gov/programs-surveys/popest.html).
-We recommend further investigation of the relationship between breweries and location, possibly supplemented
-with geo-coordinates of breweries to assess concentrations and regional palate preferences.
+We reccommend further investigation of the relationship between breweries and location, possibly supplemented
+with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
 
+##### Brewery Density by State
 ![](_imgs/report-unnamed-chunk-5-1.png)<!-- -->![](_imgs/report-unnamed-chunk-5-2.png)<!-- -->![](_imgs/report-unnamed-chunk-5-3.png)<!-- -->![](_imgs/report-unnamed-chunk-5-4.png)<!-- -->![](_imgs/report-unnamed-chunk-5-5.png)<!-- -->![](_imgs/report-unnamed-chunk-5-6.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
  <thead>
@@ -438,93 +440,8 @@ with geo-coordinates of breweries to assess concentrations and regional palate p
 </table>
 
 
-### NA's Report
-<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
-<caption style="font-size: initial !important;">NA, Not NA, Null and Unique Total Counts</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Column </th>
-   <th style="text-align:left;"> NA_totals </th>
-   <th style="text-align:left;"> Not_NA_totals </th>
-   <th style="text-align:left;"> Null_totals </th>
-   <th style="text-align:left;"> Unique_totals </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Brewery_ID </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 558 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Brewery_Name </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 551 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> City </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 384 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> State </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 51 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Beer_Name </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2304 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Beer_ID </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> ABV </td>
-   <td style="text-align:left;"> 62 </td>
-   <td style="text-align:left;"> 2348 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 75 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> IBU </td>
-   <td style="text-align:left;"> 1005 </td>
-   <td style="text-align:left;"> 1405 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 108 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Style </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 100 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Ounces </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 2410 </td>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:left;"> 7 </td>
-  </tr>
-</tbody>
-</table>
-### Statistical Analysis of Beer Variables by State
-![](_imgs/report-unnamed-chunk-7-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+##### Analysis of Beer Variables by State
+![](_imgs/report-unnamed-chunk-6-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median IBU by State</caption>
  <thead>
   <tr>
@@ -664,7 +581,7 @@ with geo-coordinates of breweries to assess concentrations and regional palate p
 </tbody>
 </table>
 
-![](_imgs/report-unnamed-chunk-7-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+![](_imgs/report-unnamed-chunk-6-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
  <thead>
   <tr>
@@ -804,9 +721,10 @@ with geo-coordinates of breweries to assess concentrations and regional palate p
 </tbody>
 </table>
 
-### State Maximums
-![](_imgs/report-unnamed-chunk-8-1.png)<!-- -->![](_imgs/report-unnamed-chunk-8-2.png)<!-- -->
+##### State Maximums
+![](_imgs/report-unnamed-chunk-7-1.png)<!-- -->![](_imgs/report-unnamed-chunk-7-2.png)<!-- -->
 
 
 ### Relationship between IBU and ABV
-![](_imgs/report-unnamed-chunk-9-1.png)<!-- -->
+![](_imgs/report-unnamed-chunk-8-1.png)<!-- -->
+
