@@ -1,12 +1,11 @@
 # Beers Case Study
 Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
-
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
 [report.md](./report.md)
 
 # Description
-Creates an analysis of the two datasets to demonstrate findings, vizualizes the number of craft breweries by state, summarizes the statistical parameters of the beers by alcohol and by bitterness, and examines the relationships of these parameters by the state and as a comparision to other US craft beers.
+An analysis of the craft beers and breweries by state and signifigant measurable parameters. This report vizualizes the number of craft breweries by state, summarizes the statistical parameters of the beers by alcohol and by bitterness, and examines the relationships of these parameters by the state and as a comparision to other US craft beers.
 
 # Software Requirements
 * R Studio
@@ -25,10 +24,26 @@ Creates an analysis of the two datasets to demonstrate findings, vizualizes the 
 * install.packages("ggformula")
 * install.packages("formattable")
 
-# Usage
-library(knitr) <br />
-?knit <br />
+## Getting Started
+This report is built with [knitr](https://github.com/yihui/knitr).  To build the report install knitr and knit the report.rmd file or to just view the report click here, [report.md](./report.md).
+
+## Installation
+
+You can install the stable version on
+[CRAN](https://cran.r-project.org/package=knitr):
+
+```r
+install.packages('knitr', dependencies = TRUE)
+```
+
+## Usage
+
+```r
+library(knitr)
+?knit
 knit(input)
+```
+
 
 # Raw Tables
 #### Beers.csv
