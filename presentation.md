@@ -15,11 +15,11 @@ In particular we were asked to tally and vizualize the number of craft breweries
 
 # Analysis
 
-## Microbreweries by State
+### Microbreweries by State
 ![](_imgs/unnamed-chunk-1-1.png)<!-- -->![](_imgs/unnamed-chunk-1-2.png)<!-- -->![](_imgs/unnamed-chunk-1-3.png)<!-- -->![](_imgs/unnamed-chunk-1-4.png)<!-- -->![](_imgs/unnamed-chunk-1-5.png)<!-- -->![](_imgs/unnamed-chunk-1-6.png)<!-- -->
 
 
-## Merged Beer and Brewery Data Summary
+### Merged Beer and Brewery Data Summary
 <table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
  <thead>
   <tr>
