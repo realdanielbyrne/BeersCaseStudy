@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,fig.path = "_imgs/")
+knitr::opts_chunk$set(echo = TRUE,fig.path = "_imgs/report-")
 
 library(data.table)
 library(dplyr)
@@ -80,7 +80,7 @@ new_map(data = brewery_northeast, values = "total", include = northeast, labels 
 new_map(data = brewery_midwest, values = "total", include = midwest, labels = TRUE, label = brewery_midwest$total, lines = "red") +
   scale_fill_continuous(type = "viridis") + 
   theme_void() + 
-  ggtitle("Northeast Breweries by State") + 
+  ggtitle("Midwest Breweries by State") + 
   theme(plot.title = element_text(hjust = 0.5), legend.position="none")
 
 new_map(data = brewery_south, values = "total", include = south, labels = TRUE, label = brewery_south$total, lines = "red") + 

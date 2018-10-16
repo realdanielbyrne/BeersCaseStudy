@@ -16,7 +16,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 # Analysis
 
 ### Microbreweries by State
-![](_imgs/unnamed-chunk-1-1.png)<!-- -->![](_imgs/unnamed-chunk-1-2.png)<!-- -->![](_imgs/unnamed-chunk-1-3.png)<!-- -->![](_imgs/unnamed-chunk-1-4.png)<!-- -->![](_imgs/unnamed-chunk-1-5.png)<!-- -->![](_imgs/unnamed-chunk-1-6.png)<!-- -->
+![](_imgs/report-unnamed-chunk-1-1.png)<!-- -->![](_imgs/report-unnamed-chunk-1-2.png)<!-- -->![](_imgs/report-unnamed-chunk-1-3.png)<!-- -->![](_imgs/report-unnamed-chunk-1-4.png)<!-- -->![](_imgs/report-unnamed-chunk-1-5.png)<!-- -->![](_imgs/report-unnamed-chunk-1-6.png)<!-- -->
 
 
 ### Merged Beer and Brewery Data Summary
@@ -245,7 +245,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </tbody>
 </table>
 ### Statistical Analysis of Beer Variables by State
-![](_imgs/unnamed-chunk-4-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+![](_imgs/report-unnamed-chunk-4-1.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median IBU by State</caption>
  <thead>
   <tr>
@@ -385,7 +385,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </tbody>
 </table>
 
-![](_imgs/unnamed-chunk-4-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
+![](_imgs/report-unnamed-chunk-4-2.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
 <caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
  <thead>
   <tr>
@@ -526,7 +526,7 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </table>
 
 ### State Maximums
-![](_imgs/unnamed-chunk-5-1.png)<!-- -->![](_imgs/unnamed-chunk-5-2.png)<!-- -->
+![](_imgs/report-unnamed-chunk-5-1.png)<!-- -->![](_imgs/report-unnamed-chunk-5-2.png)<!-- -->
 
 ### Summary statistics for the ABV variable
 <table class="table table-striped table-condensed" style="font-size: 10px; width: auto !important; ">
@@ -560,4 +560,4 @@ In particular we were asked to tally and vizualize the number of craft breweries
 </table>
 
 ### Relationship between IBU and ABV
-![](_imgs/unnamed-chunk-7-1.png)<!-- -->
+![](_imgs/report-unnamed-chunk-7-1.png)<!-- -->
