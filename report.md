@@ -49,9 +49,34 @@ regionally or nationally as local and national preferences dictate.
 
 # Analysis
 
-## The Data Basics
-We noticed a few abnormalities in the datasets. 1005 out of 2410 (41.7% ) beers did not have an IBU value. 62 out of 2410 (2.57%) beers did not have a ABV value. Beers with missing values are not represented
-in the analysis.
+The data provided consisted of two csv files, [beers.csv](./beers.csv) and [breweries.csv](./beers.csv)
+containing a sampling of information on craft beers and breweries across the United States.
+
+##### Beers.csv
+The Beers dataset contains a list of 2410 US craft beers.
+
+- *Name:* Name of the beer.
+- *Beer_ID:* Unique identifier of the beer.
+- *ABV:* Alcohol by volume of the beer.
+- *IBU:* International Bitterness Units of the beer.
+- *Brewery_ID:* Brewery id associated with the beer.
+- *Style:* Style of the beer.
+- *Ounces:* Ounces of beer.
+
+##### Breweries.csv
+The Breweries dataset contains 558 US breweries. 
+
+- *Brew_ID:* Unique identifier of the brewery.
+- *Name:* Name of the brewery.
+- *City:* City where the brewery is located.
+- *State:* State where the brewery is located.
+
+We noticed a few abnormalities in the datasets. 
+
+- 1005 out of 2410 (41.7% ) beers did not have an IBU value.
+- 62 out of 2410 (2.57%) beers did not have a ABV value. 
+
+Beers with missing values are not represented in the analysis.
 
 <table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
 <caption style="font-size: initial !important;">NA, Not NA, Null and Unique Total Counts</caption>
@@ -203,77 +228,11 @@ The IBU profile of the beers in the study was broader with a greater variance, a
   </tr>
 </tbody>
 </table>
-
 ### Microbreweries by State
-From the data available it was difficult to determine the density of breweries except for broadly by state.
-As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
-toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries.
-We reccommend further investigation of the relationship between breweries and location, possibly supplemented
-with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
-
-![](_imgs/report-unnamed-chunk-4-1.png)<!-- -->![](_imgs/report-unnamed-chunk-4-2.png)<!-- -->![](_imgs/report-unnamed-chunk-4-3.png)<!-- -->![](_imgs/report-unnamed-chunk-4-4.png)<!-- -->![](_imgs/report-unnamed-chunk-4-5.png)<!-- -->![](_imgs/report-unnamed-chunk-4-6.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
-<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> min </th>
-   <th style="text-align:left;"> Q1 </th>
-   <th style="text-align:left;"> median </th>
-   <th style="text-align:left;"> Q3 </th>
-   <th style="text-align:left;"> max </th>
-   <th style="text-align:left;"> mean </th>
-   <th style="text-align:left;"> sd </th>
-   <th style="text-align:left;"> n </th>
-   <th style="text-align:left;"> missing </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 0.001 </td>
-   <td style="text-align:left;"> 0.05 </td>
-   <td style="text-align:left;"> 0.056 </td>
-   <td style="text-align:left;"> 0.067 </td>
-   <td style="text-align:left;"> 0.128 </td>
-   <td style="text-align:left;"> 0.0597734 </td>
-   <td style="text-align:left;"> 0.0135417 </td>
-   <td style="text-align:left;"> 2348 </td>
-   <td style="text-align:left;"> 62 </td>
-  </tr>
-</tbody>
-</table>
+We joined the two datasets on the brewery id, and analysed the beer by state.
 
 <table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
-<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> min </th>
-   <th style="text-align:left;"> Q1 </th>
-   <th style="text-align:left;"> median </th>
-   <th style="text-align:left;"> Q3 </th>
-   <th style="text-align:left;"> max </th>
-   <th style="text-align:left;"> mean </th>
-   <th style="text-align:left;"> sd </th>
-   <th style="text-align:left;"> n </th>
-   <th style="text-align:left;"> missing </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 0.001 </td>
-   <td style="text-align:left;"> 0.05 </td>
-   <td style="text-align:left;"> 0.056 </td>
-   <td style="text-align:left;"> 0.067 </td>
-   <td style="text-align:left;"> 0.128 </td>
-   <td style="text-align:left;"> 0.0597734 </td>
-   <td style="text-align:left;"> 0.0135417 </td>
-   <td style="text-align:left;"> 2348 </td>
-   <td style="text-align:left;"> 62 </td>
-  </tr>
-</tbody>
-</table>
-
-
-### Merged Beer and Brewery Data Summary
-<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">Merged Data Summary</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Brewery </th>
@@ -411,6 +370,74 @@ with geo-coordinates of breweries to assess concentrations and regional pallate 
   </tr>
 </tbody>
 </table>
+
+From the data available it was difficult to determine the density of breweries except for broadly by state.
+As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
+toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries
+with a population of only 5.6 million compared with [California's population of 40 Million](https://www.census.gov/programs-surveys/popest.html).
+We reccommend further investigation of the relationship between breweries and location, possibly supplemented
+with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
+
+![](_imgs/report-unnamed-chunk-5-1.png)<!-- -->![](_imgs/report-unnamed-chunk-5-2.png)<!-- -->![](_imgs/report-unnamed-chunk-5-3.png)<!-- -->![](_imgs/report-unnamed-chunk-5-4.png)<!-- -->![](_imgs/report-unnamed-chunk-5-5.png)<!-- -->![](_imgs/report-unnamed-chunk-5-6.png)<!-- --><table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0.001 </td>
+   <td style="text-align:left;"> 0.05 </td>
+   <td style="text-align:left;"> 0.056 </td>
+   <td style="text-align:left;"> 0.067 </td>
+   <td style="text-align:left;"> 0.128 </td>
+   <td style="text-align:left;"> 0.0597734 </td>
+   <td style="text-align:left;"> 0.0135417 </td>
+   <td style="text-align:left;"> 2348 </td>
+   <td style="text-align:left;"> 62 </td>
+  </tr>
+</tbody>
+</table>
+
+<table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">
+<caption style="font-size: initial !important;">Top 10 Median ABV by State</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> Q1 </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:left;"> Q3 </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> mean </th>
+   <th style="text-align:left;"> sd </th>
+   <th style="text-align:left;"> n </th>
+   <th style="text-align:left;"> missing </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 0.001 </td>
+   <td style="text-align:left;"> 0.05 </td>
+   <td style="text-align:left;"> 0.056 </td>
+   <td style="text-align:left;"> 0.067 </td>
+   <td style="text-align:left;"> 0.128 </td>
+   <td style="text-align:left;"> 0.0597734 </td>
+   <td style="text-align:left;"> 0.0135417 </td>
+   <td style="text-align:left;"> 2348 </td>
+   <td style="text-align:left;"> 62 </td>
+  </tr>
+</tbody>
+</table>
+
 
 ### NA's Report
 <table class="table table-striped table-condensed" style="font-size: 12px; width: auto !important; ">

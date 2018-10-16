@@ -75,9 +75,34 @@ regionally or nationally as local and national preferences dictate.
 
 # Analysis
 
-## The Data Basics
-We noticed a few abnormalities in the datasets. 1005 out of 2410 (41.7% ) beers did not have an IBU value. 62 out of 2410 (2.57%) beers did not have a ABV value. Beers with missing values are not represented
-in the analysis.
+The data provided consisted of two csv files, [beers.csv](./beers.csv) and [breweries.csv](./beers.csv)
+containing a sampling of information on craft beers and breweries across the United States.
+
+##### Beers.csv
+The Beers dataset contains a list of 2410 US craft beers.
+
+- *Name:* Name of the beer.
+- *Beer_ID:* Unique identifier of the beer.
+- *ABV:* Alcohol by volume of the beer.
+- *IBU:* International Bitterness Units of the beer.
+- *Brewery_ID:* Brewery id associated with the beer.
+- *Style:* Style of the beer.
+- *Ounces:* Ounces of beer.
+
+##### Breweries.csv
+The Breweries dataset contains 558 US breweries. 
+
+- *Brew_ID:* Unique identifier of the brewery.
+- *Name:* Name of the brewery.
+- *City:* City where the brewery is located.
+- *State:* State where the brewery is located.
+
+We noticed a few abnormalities in the datasets. 
+
+- 1005 out of 2410 (41.7% ) beers did not have an IBU value.
+- 62 out of 2410 (2.57%) beers did not have a ABV value. 
+
+Beers with missing values are not represented in the analysis.
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 # Count na, notna, null, and distinct values
@@ -116,11 +141,28 @@ densityplot(~IBU,data=brewery_beer)
 kable(ibusummary, align = "l", caption = "IBU Statistics", row.names = FALSE) %>% 
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
 ```
-
 ### Microbreweries by State
+We joined the two datasets on the brewery id, and analysed the beer by state.
+
+```{r,echo=FALSE,message=FALSE}
+brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
+
+# Merge head and tail subsets
+top_bot_brewery <- rbind(
+        select(head(brewery_beer),-c("Brewery_ID", "Beer_ID")),
+        select(tail(brewery_beer),-c("Brewery_ID", "Beer_ID")))
+
+# Format table
+kable(top_bot_brewery, caption="Merged Data Summary", align = "l", col.names = c("Brewery","City","State","Beer","ABV","IBU","Style","Ounces"), row.names = FALSE) %>% 
+  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12) %>% 
+  group_rows("Top Six Observations", 1,6, colnum = NULL, bold = T, label_row_css = "text-align: center") %>% 
+  group_rows("Bottom Six Observations", 7,12, colnum = NULL, bold = T, label_row_css = "text-align: center")
+```
+
 From the data available it was difficult to determine the density of breweries except for broadly by state.
 As depicted in the following graphics, states with larger populations, California, Texas, Florida tended
-toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries.
+toward having more breweries.  However, Colorado, strangely enough topped the list with 47 breweries
+with a population of only 5.6 million compared with [California's population of 40 Million](https://www.census.gov/programs-surveys/popest.html).
 We reccommend further investigation of the relationship between breweries and location, possibly supplemented
 with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
 
@@ -186,25 +228,8 @@ kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by 
 
 kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by State") %>%
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
-
 ```
 
-
-### Merged Beer and Brewery Data Summary
-```{r,echo=FALSE,message=FALSE}
-brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
-
-# Merge head and tail subsets
-top_bot_brewery <- rbind(
-        select(head(brewery_beer),-c("Brewery_ID", "Beer_ID")),
-        select(tail(brewery_beer),-c("Brewery_ID", "Beer_ID")))
-
-# Format table
-kable(top_bot_brewery, align = "l", col.names = c("Brewery","City","State","Beer","ABV","IBU","Style","Ounces"), row.names = FALSE) %>% 
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12) %>% 
-  group_rows("Top Six Observations", 1,6, colnum = NULL, bold = T, label_row_css = "text-align: center") %>% 
-  group_rows("Bottom Six Observations", 7,12, colnum = NULL, bold = T, label_row_css = "text-align: center")
-```
 
 ### NA's Report
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
