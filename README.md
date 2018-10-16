@@ -27,7 +27,9 @@ Creates an analysis of the two datasets to demonstrate findings, vizualizes the 
 
 # Usage
 library(knitr)
+
 ?knit
+
 knit(input)
 
 # Raw Tables
