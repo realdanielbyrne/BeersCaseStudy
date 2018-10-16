@@ -8,10 +8,16 @@ output:
 ---
 
 
+# Background
+According to Brewers Association for Small and Independent Craft Brewers the overall U.S. beer volume sales were down 1% in 2017, whereas craft brewer sales continued to grow at a rate of 5% by volume, reaching 12.7% of the U.S. beer market by volume. Craft production grew the most for microbreweries.Retail dollar sales of craft increased 8%, up to $26.0 billion, and now account for more than 23% of the $111.4 billion U.S. beer market.
+https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
+
 # Introduction
+While Anheuser Busch still has a large market share, craft breweries are on the rise and are a threat to future market share.
+
 Our team was presented the raw data on U.S. microbrewery beers provided by the market research department, and asked asked to analyze the data for patterns that could be used in developing new marketing opportunities.
 
-In particular we were asked to tally and vizualize the number of craft breweries by state, summarize the statistical parameters of alcohol and bitterness, and the relationships of these parameters with each other and with the States in which they were produced. 
+In particular we were asked to tally and vizualize the number of craft breweries by state, summarize the statistical parameters of alcohol and bitterness, and the relationships of these parameters with each other and with the States in which they were produced.
 
 # Analysis
 
@@ -561,3 +567,10 @@ In particular we were asked to tally and vizualize the number of craft breweries
 
 ### Relationship between IBU and ABV
 ![](_imgs/report-unnamed-chunk-7-1.png)<!-- -->
+
+# Summary
+Your top selling beers, Bud Light and Budweiser are under the median ABVs and IBUs as compared to craft beers.
+
+A Cost/Benefit Analysis would be beneficial to explore higher ABV/ IBU markets.
+
+We also recommend an in depth analysis of Colorado to explore possible acquisitions
