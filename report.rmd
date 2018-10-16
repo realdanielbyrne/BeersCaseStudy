@@ -141,7 +141,7 @@ densityplot(~IBU,data=brewery_beer)
 kable(ibusummary, align = "l", caption = "IBU Statistics", row.names = FALSE) %>% 
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
 ```
-### Microbreweries by State
+### Analysis by State
 We joined the two datasets on the brewery id, and analysed the beer by state.
 
 ```{r,echo=FALSE,message=FALSE}
@@ -166,6 +166,7 @@ with a population of only 5.6 million compared with [California's population of 
 We reccommend further investigation of the relationship between breweries and location, possibly supplemented
 with geo-coordinates of breweries to assess concentrations and regional pallate preferences.
 
+##### Brewery Density by State
 ```{r,echo=FALSE,message=FALSE}
 brewery_cnt = data.frame(table(breweries$State))
 colnames(brewery_cnt) <- c("abbr","total")
@@ -231,21 +232,7 @@ kable(abvsummary, align = "l", row.names = FALSE, caption="Top 10 Median ABV by 
 ```
 
 
-### NA's Report
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-# Count na, notna, null, and distinct values
-t_brewery_na <- data.frame(add_rownames(data.frame(
-  sapply(brewery_beer, function(x) sum(is.na(x))), 
-  sapply(brewery_beer, function(x) sum(!is.na(x))),
-  sapply(brewery_beer, function(x) sum(is.null(x))),
-  sapply(brewery_beer, function(x) sum(n_distinct(x)))),
-  "VALUE"))
-
-colnames(t_brewery_na) <- c("Column","NA_totals","Not_NA_totals","Null_totals","Unique_totals")
-kable(t_brewery_na, align = "l", caption = "NA, Not NA, Null and Unique Total Counts", row.names = FALSE) %>% 
-  kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
-```
-### Statistical Analysis of Beer Variables by State
+##### Analysis of Beer Variables by State
 ```{r, echo=FALSE,warning=FALSE}
 ibuByState <- favstats(IBU~State,data=brewery_beer)
 abvByState <- favstats(ABV~State,data=brewery_beer)
@@ -265,7 +252,7 @@ kable(head(abvByState,10), align = "l", row.names = FALSE, caption="Top 10 Media
   kable_styling(c("striped","condensed"), full_width = F, position = "left", font_size = 12)
 ```
 
-### State Maximums
+##### State Maximums
 ```{r, echo=FALSE,warning=FALSE}
 brewery_max <- merge(x=brewery_beer, y=statepop, by.x='State', by.y='abbr', all = FALSE)[,c("Brewery_Name","City","State","Beer_Name","ABV","IBU","full","fips")]
 
