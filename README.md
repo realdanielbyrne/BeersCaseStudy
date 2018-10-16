@@ -1,7 +1,8 @@
 # Beers Case Study
 Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
-
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
+
+https://github.com/realdanielbyrne/BeersCaseStudy/blob/master/report.md
 
 # Purpose
 The research department provided us with two data sets that we were asked to analyze that would be beneficial in identifying new market opportunities within the craft beer segment.
