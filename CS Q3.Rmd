@@ -22,7 +22,6 @@ colnames(breweries) <- c("Brewery_ID","Brewery_Name","City","State")
 breweries$Brewery_ID <-as.character(breweries$Brewery_ID)
 
 brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
-bbsummary <-summary(brewery_beer)
 
 # Count na, notna, null, and distinct values
 t_brewery_na <- data.frame(add_rownames(data.frame(
