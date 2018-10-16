@@ -1,13 +1,36 @@
 # Beers Case Study
-Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location 
+Statistical Analysis of Beer by Alcohol, Bitterness, Brewery and Location
+
 Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
-# Purpose
-  The research department provided us with two data sets that we were asked to analyze that would be beneficial in identifying new market opportunities within the craft beer segment.
-  
-  The raw data for this study was provided in the form of two csv files, `beers.csv` and `breweries.csv`.  We then needed to join the two tables together so that we would be able to determine which beers belong to a particular brewery and which state it was produced.
+https://github.com/realdanielbyrne/BeersCaseStudy/blob/master/report.md
 
-# Tables
+# Description
+Creates an analysis of the two datasets to demonstrate findings, vizualizes the number of craft breweries by state, summarizes the statistical parameters of the beers by alcohol and by bitterness, and examines the relationships of these parameters by the state and as a comparision to other US craft beers.
+
+# Software Requirements
+* R Studio
+
+# Requirements
+* install.packages("data.table")
+* install.packages("dplyr")
+* install.packages("ggplot2")
+* install.packages("kableExtra")
+* install.packages("knitr")
+* install.packages("pander")
+* install.packages("reshape2")
+* install.packages("usmap")
+* install.packages("tidyr")
+* install.packages("mosaic")
+* install.packages("ggformula")
+* install.packages("formattable")
+
+# Usage
+library(knitr) <br />
+?knit <br />
+knit(input)
+
+# Raw Tables
 #### Beers.csv
 The Beers dataset contains a list of 2410 US craft beers.
 - *Name:* Name of the beer.
@@ -24,9 +47,3 @@ The Breweries dataset contains 558 US breweries.
 - *Name:* Name of the brewery.
 - *City:* City where the brewery is located.
 - *State:* U.S. State where the brewery is located.
-
-  We were then asked to provide the following objectives.  Create an analysis of the two datasets to demonstrate our findings, vizualize the number of craft breweries by state, summarize the statistical parameters of the beers by alcohol by volume and by bitterness, and examine the relationships of these parameters by the state and as a comparision to other US craft beers.
-
-  Finally we were asked to come up with a slideshow to present our findings to the research department and other stakeholders.
-  
-  # Codebook
