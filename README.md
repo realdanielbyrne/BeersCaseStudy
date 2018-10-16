@@ -11,7 +11,9 @@ Research Team Members : Daniel Byrne, Joanna Duran, Matthew Norton
 
   Finally we were asked to come up with a slideshow to present our findings to the research department and other stakeholders.
 
-# Tables
+# Codebook
+
+# Raw Tables
 #### Beers.csv
 The Beers dataset contains a list of 2410 US craft beers.
 - *Name:* Name of the beer.
@@ -29,4 +31,4 @@ The Breweries dataset contains 558 US breweries.
 - *City:* City where the brewery is located.
 - *State:* U.S. State where the brewery is located.
   
-  # Codebook
+
