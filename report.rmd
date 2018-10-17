@@ -291,3 +291,7 @@ The scatter plot of ABV and IBU suggests a relationship between alcohol and bitt
 The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%. This hints at a potential trend towards higher alcohol content preferences.  Further, investigation along this line would be to determine whether or not there is a regional preference for beers with higher alcohol content.
 
 The concentration of breweries mirrored the population density of the states in which they were located with the notable exception of Colorado.  Colorado had the highest density of microbreweries in the study. However, our investigation of the available data did not determine a likely cause for this high concentration.  Further investigation is reccommended.
+
+Alcohol Content and Bitterness showed a correlation, but the strength of that correlation was not examined in this analysis.
+
+Further investigation is recommended for determining geographic significance or breweries and testing for regional palates.
