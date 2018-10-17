@@ -35,22 +35,22 @@ breweries$Brewery_ID <- as.character(breweries$Brewery_ID)
 brewery_beer <- merge(breweries, beers, by=c("Brewery_ID"))
 ```
 # Preface
-Anheuser Busch inc, the Client, in coordination with Byrne, Durant Norton reseach LLP 
+Anheuser-Busch Companies, LLC, the Client, in coordination with Byrne, Duran & Norton research LLP 
 pursuant to Statement of Work number 1016, is evaluating statistical data on craft beers
-for Anheuser Busch to use in market research.
+for the Client to use in market research.
 
 Our company was presented the raw data on U.S. microbrewery beers provided by the Client's market 
-research department, and asked asked to analyze the data for patterns that could be used in
+research departmen and asked to analyze the data for patterns that could be used in
 developing new marketing opportunities.
 
 # Introduction
 This "Request For Comment", RFC, document  is being issued as an attempt to
-stimulate a dialog on new market opportunituies in the ever growing microbrewery market.
-In particular this RFC considers the raw beer statistics provided in the `beers.csv` and
+stimulate a dialog on new market opportunities in the ever growing microbrewery market.
+This RFC considers the raw beer statistics provided in the `beers.csv` and
 `breweries.csv` provided to us by our Client and analyzes these data for possible trends
-to lay the groundwork for possible aquisitions and marketing campaings.  
+to lay the groundwork for possible acquisitions and marketing campaigns.  
 
-In particular we were asked to tally and vizualize the number of craft breweries by state,
+We were asked to tally and visualize the number of craft breweries by state,
 summarize the statistical parameters of alcohol and bitterness of regional beers, and to 
 identify any relationships of these parameters with each other and with the States in which
 they were produced. 
@@ -58,16 +58,15 @@ they were produced.
 # Background
 According to Brewers Association for Small and Independent Craft Brewers the overall U.S. beer
 volume sales were down 1% in 2017, whereas craft brewer sales continued to grow at a rate of 5%
-by volume, reaching 12.7% of the U.S. beer market by volume. Specifically 'Craft' production grew
-the most.
+by volume, reaching 12.7% of the U.S. beer market by volume. 
 
 Specifically 'Craft' production grew the most. Retail dollar sales of craft brews increased 8%,
 yar over year up to $26.0 billion. Craft brews now account for a quarter of the $111.4
 billion U.S. beer market.
 
-While Anheuser Busch still has a large market share, craft breweries are on the rise and are a
-threat to future market share.  However, Anheuser Busch has had recent successes in purchasing 
-regional craft breweries, retaining their labnel and naming rights, but distributing these brews either
+While the Client still has a large market share, craft breweries are on the rise and are a
+threat to future market share.  However, the Client has had recent successes in purchasing 
+regional craft breweries, retaining their label and naming rights, but distributing these brews either
 regionally or nationally as local and national preferences dictate.
 
 [https://www.brewersassociation.org/statistics/national-beer-sales-production-data/
@@ -287,10 +286,8 @@ abv_ibu_map(data = ibu_beer, values = "IBU", include = c(ibu_beer$fips), label =
 gf_point(IBU~ABV,data=brewery_beer,color=~ABV-IBU)
 ```
 The scatter plot of ABV and IBU suggests a relationship between alcohol and bitterness.  While not performed, and Analysis of Covariance could be used to test the interaction effect strength between these two variables. 
-
 # Summary
+
 The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%. This hints at a potential trend towards higher alcohol content preferences.  Further, investigation along this line would be to determine whether or not there is a regional preference for beers with higher alcohol content.
 
 The concentration of breweries mirrored the population density of the states in which they were located with the notable exception of Colorado.  Colorado had the highest density of microbreweries in the study. However, our investigation of the available data did not determine a likely cause for this high concentration.  Further investigation is reccommended.
-
-The analysis showed that there seemed to be a correlation between the alchol content and the bitterness.  The strength of that correlation was not investigated, but a Analasys of Covariance test could be run against the data to establish a parameter for this correlation.  
