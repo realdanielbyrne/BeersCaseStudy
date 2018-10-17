@@ -721,10 +721,18 @@ with geo-coordinates of breweries to assess concentrations and regional pallate 
 </tbody>
 </table>
 
+
 ##### State Maximums
 ![](_imgs/report-unnamed-chunk-7-1.png)<!-- -->![](_imgs/report-unnamed-chunk-7-2.png)<!-- -->
 
 
 ### Relationship between IBU and ABV
 ![](_imgs/report-unnamed-chunk-8-1.png)<!-- -->
+The scatter plot of ABV and IBU suggests a relationship between alcohol and bitterness.  While not performed, and Analysis of Covariance could be used to test the interaction effect strength between these two variables. 
 
+# Summary
+The alcohol content of the beers in the study ranged from ~.001% to 12% with the median and mean landing around 6%.  However, the majority of the outliers as evidenced by the ABV boxplot shows a tendency towards the higher and of the range from 10-12%. This hints at a potential trend towards higher alcohol content preferences.  Further, investigation along this line would be to determine whether or not there is a regional preference for beers with higher alcohol content.
+
+The concentration of breweries mirrored the population density of the states in which they were located with the notable exception of Colorado.  Colorado had the highest density of microbreweries in the study. However, our investigation of the available data did not determine a likely cause for this high concentration.  Further investigation is reccommended.
+
+The analysis showed that there seemed to be a correlation between the alchol content and the bitterness.  The strength of that correlation was not investigated, but a Analasys of Covariance test could be run against the data to establish a parameter for this correlation.  
