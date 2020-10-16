@@ -10,4 +10,6 @@
 *.gitattributes text
 .gitignore text
 *.md text
-*.html linguist-language=Rmarkdown
+*.html linguist-language=R
+*.rmd linguist-language=R
+
